@@ -1,16 +1,18 @@
 package com.zboxcross.ecommerce.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_user")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode
 public class User implements Serializable {
 
@@ -20,4 +22,13 @@ public class User implements Serializable {
     private Long id;
     private String name;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    @Setter(AccessLevel.NONE)
+    private List<Order> orders = new ArrayList<>();
+
+    public User(Long id, String name){
+        this.id = id;
+        this.name = name;
+    }
 }
