@@ -1,5 +1,6 @@
 package com.zboxcross.ecommerce.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class Product implements Serializable {
     private String name;
     private Double price;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private Stock stock;
 
