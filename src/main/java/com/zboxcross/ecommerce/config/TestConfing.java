@@ -1,8 +1,10 @@
 package com.zboxcross.ecommerce.config;
 
 import com.zboxcross.ecommerce.entities.Order;
+import com.zboxcross.ecommerce.entities.Payment;
 import com.zboxcross.ecommerce.entities.User;
 import com.zboxcross.ecommerce.entities.enums.OrderStatus;
+import com.zboxcross.ecommerce.entities.enums.PaymentMethod;
 import com.zboxcross.ecommerce.repositories.OrderRepository;
 import com.zboxcross.ecommerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +36,11 @@ public class TestConfing implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(u1,u2,u3));
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
 
+        Payment pay1 = new Payment(null, Instant.now(), PaymentMethod.PIX, o1);
+        Payment pay2 = new Payment(null, Instant.now(), PaymentMethod.CARTAO_CREDITO, o2);
+
+        o1.setPayment(pay1);
+        o2.setPayment(pay2);
+        orderRepository.saveAll(Arrays.asList(o1,o2));
     }
 }
