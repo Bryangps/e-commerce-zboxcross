@@ -1,7 +1,9 @@
 package com.zboxcross.ecommerce.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.zboxcross.ecommerce.entities.enums.OrderStatus;
+import com.zboxcross.ecommerce.entities.views.ViewOrder;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +19,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
+@JsonView(ViewOrder.OrderView.class)
 public class Order implements Serializable {
 
     @Id
@@ -26,7 +29,6 @@ public class Order implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
-
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     private Integer orderStatus;
@@ -34,10 +36,10 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
-
+    @JsonView(ViewOrder.OrderView.class)
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
-
+    @JsonView(ViewOrder.OrderView.class)
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 

@@ -1,6 +1,8 @@
 package com.zboxcross.ecommerce.resources;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.zboxcross.ecommerce.entities.Order;
+import com.zboxcross.ecommerce.entities.views.ViewOrder;
 import com.zboxcross.ecommerce.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,14 @@ public class OrderResource {
     private OrderService service;
 
     @GetMapping
+    @JsonView(ViewOrder.OrderView.class)
     public ResponseEntity<List<Order>> findAll(){
         List<Order> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
+    @JsonView(ViewOrder.OrderView.class)
     public ResponseEntity<Order> findById(@PathVariable Long id){
         Order obj = service.findById(id);
         return ResponseEntity.ok().body(obj);

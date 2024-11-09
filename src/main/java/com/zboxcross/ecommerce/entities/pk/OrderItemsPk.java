@@ -1,5 +1,7 @@
 package com.zboxcross.ecommerce.entities.pk;
 
+
+import com.fasterxml.jackson.annotation.JsonView;
 import com.zboxcross.ecommerce.entities.Order;
 import com.zboxcross.ecommerce.entities.Product;
 import jakarta.persistence.Embeddable;
@@ -21,6 +23,7 @@ public class OrderItemsPk {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonView
     private Product product;
 
 

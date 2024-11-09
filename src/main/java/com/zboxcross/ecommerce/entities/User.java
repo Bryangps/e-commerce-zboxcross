@@ -1,6 +1,8 @@
 package com.zboxcross.ecommerce.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.zboxcross.ecommerce.entities.views.ViewOrder;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,6 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
+@JsonView(ViewOrder.OrderView.class)
 public class User implements Serializable {
 
     @Id

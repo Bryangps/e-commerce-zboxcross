@@ -1,7 +1,9 @@
 package com.zboxcross.ecommerce.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.zboxcross.ecommerce.entities.pk.OrderItemsPk;
+import com.zboxcross.ecommerce.entities.views.ViewOrder;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -16,6 +18,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
+@JsonView(ViewOrder.OrderView.class)
 public class OrderItem implements Serializable {
 
     @EmbeddedId

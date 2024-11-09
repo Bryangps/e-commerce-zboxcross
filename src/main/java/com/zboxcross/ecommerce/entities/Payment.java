@@ -2,7 +2,9 @@ package com.zboxcross.ecommerce.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.zboxcross.ecommerce.entities.enums.PaymentMethod;
+import com.zboxcross.ecommerce.entities.views.ViewOrder;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +18,7 @@ import java.time.Instant;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
+@JsonView(ViewOrder.OrderView.class)
 public class Payment implements Serializable {
 
     @Id
