@@ -1,12 +1,10 @@
 package com.zboxcross.ecommerce.config;
 
-import com.zboxcross.ecommerce.entities.Order;
-import com.zboxcross.ecommerce.entities.Payment;
-import com.zboxcross.ecommerce.entities.Stock;
-import com.zboxcross.ecommerce.entities.User;
+import com.zboxcross.ecommerce.entities.*;
 import com.zboxcross.ecommerce.entities.enums.OrderStatus;
 import com.zboxcross.ecommerce.entities.enums.PaymentMethod;
 import com.zboxcross.ecommerce.repositories.OrderRepository;
+import com.zboxcross.ecommerce.repositories.ProductRepository;
 import com.zboxcross.ecommerce.repositories.StockRepository;
 import com.zboxcross.ecommerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +27,23 @@ public class TestConfing implements CommandLineRunner {
     @Autowired
     private StockRepository stockRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     public void run(String... args) throws Exception {
 
-        Stock stock01 = new Stock(null, Instant.now(), 400L, 400L, 0L);
-        Stock stock02 = new Stock(null, Instant.now(), 500L, 500L, 0L);
-        Stock stock03 = new Stock(null, Instant.now(), 600L, 600L, 0L);
+        Product prod01 = new Product(null, "Stempel", 14.0);
+        Product prod02 = new Product(null, "Coca", 5.0);
+        Product prod03 = new Product(null, "Sprit", 4.0);
+
+
+        Stock stock01 = new Stock(null, Instant.now(), 400L, 400L, 0L, prod01);
+        Stock stock02 = new Stock(null, Instant.now(), 500L, 500L, 0L, prod02);
+        Stock stock03 = new Stock(null, Instant.now(), 600L, 600L, 0L, prod03);
+
 
         stockRepository.saveAll(Arrays.asList(stock01,stock02,stock03));
-
+        productRepository.saveAll(Arrays.asList(prod01,prod02,prod03));
 
 
         User u1 = new User(null, "Gui Red");

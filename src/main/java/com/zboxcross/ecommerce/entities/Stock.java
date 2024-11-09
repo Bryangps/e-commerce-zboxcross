@@ -1,6 +1,7 @@
 package com.zboxcross.ecommerce.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,13 +30,19 @@ public class Stock implements Serializable {
     private Long remaining_qty;
     private Long output_qty;
 
+    @JsonIgnore
+    @OneToOne
+    @MapsId
+    private Product product;
 
-    public Stock(Long id, Instant registrationDate, Long total_qty, Long remaining_qty, Long output_qty){
+
+    public Stock(Long id, Instant registrationDate, Long total_qty, Long remaining_qty, Long output_qty, Product product){
         this.id = id;
         this.registrationDate = registrationDate;
         this.total_qty = total_qty;
         this.remaining_qty = remaining_qty;
         this.output_qty = output_qty;
+        this.product = product;
     }
 
 }
