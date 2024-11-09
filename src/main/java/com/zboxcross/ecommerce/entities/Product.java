@@ -23,9 +23,14 @@ public class Product implements Serializable {
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private Stock stock;
 
-    public Product(Long id, String name, Double price){
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    public Product(Long id, String name, Double price, Category category){
         this.id = id;
         this.name = name;
         this.price = price;
+        this.category = category;
     }
 }

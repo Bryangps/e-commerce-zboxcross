@@ -3,10 +3,7 @@ package com.zboxcross.ecommerce.config;
 import com.zboxcross.ecommerce.entities.*;
 import com.zboxcross.ecommerce.entities.enums.OrderStatus;
 import com.zboxcross.ecommerce.entities.enums.PaymentMethod;
-import com.zboxcross.ecommerce.repositories.OrderRepository;
-import com.zboxcross.ecommerce.repositories.ProductRepository;
-import com.zboxcross.ecommerce.repositories.StockRepository;
-import com.zboxcross.ecommerce.repositories.UserRepository;
+import com.zboxcross.ecommerce.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -25,26 +22,36 @@ public class TestConfing implements CommandLineRunner {
     private OrderRepository orderRepository;
 
     @Autowired
-    private StockRepository stockRepository;
+    private ProductRepository productRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    private CategoryRepository categoryRepository;
 
     public void run(String... args) throws Exception {
 
-        Product prod01 = new Product(null, "Stempel", 14.0);
-        Product prod02 = new Product(null, "Coca", 5.0);
-        Product prod03 = new Product(null, "Sprit", 4.0);
+        /* ----Created Category and Product----*/
+        Category cate01 = new Category(null,"Alcoolico");
+        Category cate02 = new Category(null,"Nao Alcoolico");
+
+        Product prod01 = new Product(null, "Stempel", 14.0, cate01);
+        Product prod02 = new Product(null, "Coca", 5.0, cate02);
+        Product prod03 = new Product(null, "Sprit", 4.0, cate02);
 
 
+        categoryRepository.saveAll(Arrays.asList(cate01,cate02));
+        productRepository.saveAll(Arrays.asList(prod01,prod02,prod03));
+
+        /* ----Created Stock ----*/
         Stock stock01 = new Stock(null, Instant.now(), 400L, 400L, 0L, prod01);
         Stock stock02 = new Stock(null, Instant.now(), 500L, 500L, 0L, prod02);
         Stock stock03 = new Stock(null, Instant.now(), 600L, 600L, 0L, prod03);
 
-
-        stockRepository.saveAll(Arrays.asList(stock01,stock02,stock03));
+        prod01.setStock(stock01);
+        prod02.setStock(stock02);
+        prod03.setStock(stock03);
         productRepository.saveAll(Arrays.asList(prod01,prod02,prod03));
 
+        /* ----Created User and Order---- */
 
         User u1 = new User(null, "Gui Red");
         User u2 = new User(null, "Clara Borge");
@@ -57,6 +64,7 @@ public class TestConfing implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(u1,u2,u3));
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
 
+        /* ----Created Payment ---- */
         Payment pay1 = new Payment(null, Instant.now(), PaymentMethod.PIX, o1);
         Payment pay2 = new Payment(null, Instant.now(), PaymentMethod.CARTAO_CREDITO, o2);
 
