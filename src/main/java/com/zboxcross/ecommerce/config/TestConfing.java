@@ -2,10 +2,12 @@ package com.zboxcross.ecommerce.config;
 
 import com.zboxcross.ecommerce.entities.Order;
 import com.zboxcross.ecommerce.entities.Payment;
+import com.zboxcross.ecommerce.entities.Stock;
 import com.zboxcross.ecommerce.entities.User;
 import com.zboxcross.ecommerce.entities.enums.OrderStatus;
 import com.zboxcross.ecommerce.entities.enums.PaymentMethod;
 import com.zboxcross.ecommerce.repositories.OrderRepository;
+import com.zboxcross.ecommerce.repositories.StockRepository;
 import com.zboxcross.ecommerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,7 +26,19 @@ public class TestConfing implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private StockRepository stockRepository;
+
     public void run(String... args) throws Exception {
+
+        Stock stock01 = new Stock(null, Instant.now(), 400L, 400L, 0L);
+        Stock stock02 = new Stock(null, Instant.now(), 500L, 500L, 0L);
+        Stock stock03 = new Stock(null, Instant.now(), 600L, 600L, 0L);
+
+        stockRepository.saveAll(Arrays.asList(stock01,stock02,stock03));
+
+
+
         User u1 = new User(null, "Gui Red");
         User u2 = new User(null, "Clara Borge");
         User u3 = new User(null, "Maria Blue");
