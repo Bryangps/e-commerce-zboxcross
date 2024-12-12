@@ -22,8 +22,10 @@ public class Product implements Serializable {
     @EqualsAndHashCode.Exclude
     @JsonView(ViewOrder.OrderView.class)
     private Long id;
+
     @JsonView(ViewOrder.OrderView.class)
     private String name;
+
     @JsonView(ViewOrder.OrderView.class)
     private Double price;
 

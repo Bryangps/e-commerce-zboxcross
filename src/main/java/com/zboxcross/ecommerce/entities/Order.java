@@ -29,6 +29,7 @@ public class Order implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
+
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     private Integer orderStatus;
@@ -36,9 +37,11 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
     @JsonView(ViewOrder.OrderView.class)
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
+
     @JsonView(ViewOrder.OrderView.class)
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
