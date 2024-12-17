@@ -1,7 +1,8 @@
 package com.zboxcross.ecommerce.controllers;
 
-import com.zboxcross.ecommerce.entities.Category;
-import com.zboxcross.ecommerce.services.CategoryService;
+
+import com.zboxcross.ecommerce.entities.User;
+import com.zboxcross.ecommerce.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,23 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
 @RestController
-@RequestMapping(value = "/categories")
-public class CategoryResource {
+@RequestMapping(value = "/users")
+public class UserController {
 
     @Autowired
-    private CategoryService service;
+    private UserService service;
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll(){
-        List<Category> list = service.findAll();
+    public ResponseEntity<List<User>> findAll(){
+        List<User> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Category> findById(@PathVariable Long id){
-        Category obj = service.findById(id);
+    public ResponseEntity<User> findById(@PathVariable Long id){
+        User obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
-
 }

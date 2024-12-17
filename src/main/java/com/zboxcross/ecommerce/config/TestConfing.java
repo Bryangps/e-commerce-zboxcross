@@ -36,9 +36,9 @@ public class TestConfing implements CommandLineRunner {
         Category cate01 = new Category(null,"Alcoolico");
         Category cate02 = new Category(null,"Nao Alcoolico");
 
-        Product prod01 = new Product(null, "Stempel", 14.0, cate01);
-        Product prod02 = new Product(null, "Coca", 5.0, cate02);
-        Product prod03 = new Product(null, "Sprit", 4.0, cate02);
+        Product prod01 = new Product(null, "Stempel", 14.0, "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg", cate01);
+        Product prod02 = new Product(null, "Coca", 5.0, "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg" ,cate02);
+        Product prod03 = new Product(null, "Sprit", 4.0, "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg",cate02);
 
         categoryRepository.saveAll(Arrays.asList(cate01,cate02));
         productRepository.saveAll(Arrays.asList(prod01,prod02,prod03));

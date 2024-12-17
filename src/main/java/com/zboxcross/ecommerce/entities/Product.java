@@ -29,6 +29,8 @@ public class Product implements Serializable {
     @JsonView(ViewOrder.OrderView.class)
     private Double price;
 
+    private String imgUrl;
+
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private Stock stock;
 
@@ -42,10 +44,11 @@ public class Product implements Serializable {
     @Setter(AccessLevel.NONE)
     private Set<OrderItem> items = new HashSet<>();
 
-    public Product(Long id, String name, Double price, Category category){
+    public Product(Long id, String name, Double price, String imgUrl , Category category){
         this.id = id;
         this.name = name;
         this.price = price;
+        this.imgUrl = imgUrl;
         this.category = category;
     }
 }
