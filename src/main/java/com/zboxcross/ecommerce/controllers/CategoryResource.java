@@ -1,4 +1,4 @@
-package com.zboxcross.ecommerce.resources;
+package com.zboxcross.ecommerce.controllers;
 
 import com.zboxcross.ecommerce.entities.Category;
 import com.zboxcross.ecommerce.services.CategoryService;
